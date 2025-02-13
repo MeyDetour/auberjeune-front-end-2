@@ -1,0 +1,32 @@
+<div class="page auth">
+  <div>
+    <img src="/logo.svg" alt="">
+    <span>Auberjeune</span>
+  </div>
+  <span class="titleOfForm">Please log in !</span>
+
+
+  <form action="" method="post" #form="ngForm" (ngSubmit)="onSubmit()">
+     @if(failMessage() !="")
+    {
+      <span style="color: var(--error)">{{failMessage()}}</span>
+    }
+
+    <div>
+      <label>Email</label>
+      <input
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+        type="email"
+        [(ngModel)]="user.email"
+        name="email">
+    </div>
+    <div>
+      <label>Password</label>
+      <input
+        type="password"
+        [(ngModel)]="user.password"
+        name="password" >
+    </div>
+ <button type="submit" class="button1">Login</button>
+  </form>
+</div>

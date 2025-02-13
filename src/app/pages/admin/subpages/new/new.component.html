@@ -1,0 +1,33 @@
+<div class="newRoomPage">
+  <div>
+    <h3>Ajout</h3>
+  </div>
+  <div class="pageConten whiteContainerWithBordure">
+    <div class="multiChoice">
+      <span (click)="changeForm('booking')">Booking</span>
+      <span (click)="changeForm('room')">Room</span>
+      <span (click)="changeForm('bed')">Bed</span>
+      <span (click)="changeForm('overview')">Overview</span>
+    </div>
+    <hr>
+    @if (formToRender()==="booking"){
+        <app-booking></app-booking>
+    }
+
+    @else if (formToRender()==="bed"){
+        <app-bed></app-bed>
+    }
+
+    @else if (formToRender()==="room"){
+        <app-room></app-room>
+    }
+
+    @else if (formToRender()==="overview"){
+        <app-overview-beds-and-rooms></app-overview-beds-and-rooms>
+    }
+
+
+
+  </div>
+
+</div>

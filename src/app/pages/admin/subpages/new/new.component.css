@@ -1,0 +1,14 @@
+.newRoomPage{
+
+}
+.newRoomPage > div:first-child{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  margin-bottom: 50px;
+  height: 10%;
+}
+
+.pageContent{
+
+}

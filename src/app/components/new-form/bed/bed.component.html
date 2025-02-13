@@ -1,0 +1,83 @@
+
+<form action="" #form="ngForm" class="" (submit)="onSubmit()">
+  <div>
+    <label for="number">Name or Number</label>
+    <input type="text" id="number" name="number" [(ngModel)]="bed().number">
+  </div>
+  <div>
+    <label for="room">Room</label>
+    <select [(ngModel)]="bed().roomId"  name="room" id="room">
+      @for (room of rooms(); track room.id) {
+        <option [selected]="bed()?.roomId === room.id" value="{{room.id}}">{{ room.name }}</option>
+      }
+    </select>
+  </div>
+  <div>
+    <label for="state">State</label>
+    <select name="state" [(ngModel)]="bed().state" id="state">
+      <option [selected]="bed()?.state ==='deleted'" value="inspected">Inspected</option>
+      <option [selected]="bed()?.state === 'blocked'" value="blocked">Blocked</option>
+      <option [selected]="bed()?.state === 'cleaned'" value="cleaned">Cleaned</option>
+      <option [selected]="bed()?.state === 'notcleaned'" value="notCleaned">Not cleaned</option>
+    </select>
+  </div>
+
+  <div class="form-check"  >
+    <input type="checkbox" [(ngModel)]="bed().sittingApart" [checked]="bed()['sittingApart']" name="sittingApart" id="sittingApart">
+    <span class="checkmark"></span>
+    <label for="sittingApart">Bed is sitting apart </label>
+  </div>
+  <div class="form-check"  >
+
+    <input type="checkbox" [(ngModel)]="bed().hasLamp" [checked]="bed()['hasLamp']" name="hasLamp" id="hasLamp">
+    <span class="checkmark"></span>
+    <label for="hasLamp">Bed has lamp</label>
+  </div>
+  <div class="form-check"  >
+
+    <input type="checkbox" [(ngModel)]="bed().doubleBed" [checked]="bed()['doubleBed']" name="doubleBed" id="doubleBed">
+    <span class="checkmark"></span>
+    <label for="doubleBed">Bed is double bed </label>
+  </div>
+  <div class="form-check"  >
+
+    <input type="checkbox" [(ngModel)]="bed().hasLittleStorage" [checked]="bed()['hasLittleStorage']" name="hasLittleStorage" id="hasLittleStorage">
+    <span class="checkmark"></span>
+    <label for="hasLittleStorage">Bed has little storage</label>
+  </div>
+  <div class="form-check"  >
+
+    <input type="checkbox" [(ngModel)]="bed().hasShelf" [checked]="bed()['hasShelf']" name="hasShelf" id="hasShelf">
+    <span class="checkmark"></span>
+    <label for="hasShelf">Bed has shelf</label>
+  </div>
+  <div class="form-check"  >
+
+    <input type="checkbox" [(ngModel)]="bed().reservable" [checked]="bed()['reservable']" name="reservable"  id="reservable">
+    <span class="checkmark"></span>
+    <label for="reservable">Bed is reservable</label>
+  </div>
+  <div class="form-radio">
+
+    <div  >
+      <input [checked]="bed()['bedShape']=='singleBed'" type="radio" id="singleBed" name="bedShape"
+             value="singleBed"/>
+      <span class="radioMark"></span>
+      <label for="singleBed">Single bed</label>
+    </div>
+    <div  >
+      <input type="radio" [checked]="bed()['bedShape']=='topBed'" id="topBed" name="bedShape" value="topBed"
+             checked/>
+      <span class="radioMark"></span>
+      <label for="topBed">Top bed</label>
+    </div>
+
+    <div  >
+      <input type="radio" [checked]="bed()['bedShape']=='bottomBed'" id="bottomBed" name="bedShape"
+             value="bottomBed"/>
+      <span class="radioMark"></span>
+      <label for="bottomBed">Bottom bed</label>
+    </div>
+  </div>
+  <button class="button2">Créer</button>
+</form>
