@@ -1,14 +1,15 @@
-.newRoomPage{
+.newPage{
+  height: 100%;
 
 }
-.newRoomPage > div:first-child{
+.newPage > div:first-child{
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  margin-bottom: 50px;
   height: 10%;
 }
 
 .pageContent{
-
+height: 90%;
+  overflow-y: auto;
 }

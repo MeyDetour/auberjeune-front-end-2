@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {Bed} from '../model/Bed.type';
 import {env} from '../environment/environment';
 import {Router} from '@angular/router';
+import {ToastService} from 'angular-toastify';
 
 @Injectable({
   providedIn: 'root'
@@ -15,23 +16,30 @@ export class CreationService {
 
   private url = env.apiUrl
 
-  constructor(private http: HttpClient,private router: Router) {
+  constructor(private http: HttpClient,private router: Router,private toast:ToastService) {
   }
 
   setFormToRender(name: string): void {
     this.formToRenderSource.next(name);
   }
 
+  successFullCreation(){
+    this.toast.success("Created Successfully");
+    this.router.navigate(['/admin/dashboard']);
+
+  }
+
   async newBed(bed: Bed) {
     return this.http.post<Room>(this.url + 'api/bed/new', bed).subscribe(response => {
       console.log(response);
-      this.router.navigate(['/admin/dashboard']);
+     this.successFullCreation();
     })
   }
 
-  async createRoom(room: Room) {
+  async newRoom(room: Room) {
     this.http.post<Room>(this.url + 'api/room/new', room).subscribe(response => {
       console.log(response);
-    })
+      this.successFullCreation();
+   })
   }
 }

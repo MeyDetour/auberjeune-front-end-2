@@ -1,6 +1,6 @@
 export type Room = {
   beds?: Array<{id:number,number:string,occupied:boolean}>,
-  bedsNumber: number,
+  bedsNumber?: number,
   hasBalcony :   boolean,
   hasBin:boolean,
   hasLocker : boolean,

@@ -20,7 +20,7 @@ export class BedComponent {
   bed = signal<Bed>({
       id: 0,
       occupied: false,
-      number: "Default name",
+      number: "",
       sittingApart: false,
       state: " ",
       cleanedBy: null,
@@ -55,6 +55,19 @@ export class BedComponent {
   }
 
   async onSubmit() {
+    console.log(this.bed())
+    if (this.bed().number.replaceAll(" ",'') == ""){
+      this.failMessage.set("Please enter a valid name");
+      return;
+    }
+    if (!this.bed().roomId){
+      this.failMessage.set("Please select a room");
+      return;
+    }
+    if (this.bed().state == " "){
+      this.failMessage.set("Please select state");
+      return;
+    }
     await this.creationService.newBed(this.bed())
 
   }

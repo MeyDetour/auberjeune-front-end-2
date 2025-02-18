@@ -1,9 +1,9 @@
 import {Component, signal} from '@angular/core';
-import {UserService} from '../../../services/user.service';
 import {FailureHandler} from '../../../services/failureHandler';
-import {Router} from '@angular/router';
 import {CreationService} from '../../../services/creation.service';
 import {FormsModule} from '@angular/forms';
+import {Room} from '../../../model/Room.type';
+import {RoomService} from '../../../services/room.service';
 
 @Component({
   selector: 'app-room',
@@ -14,12 +14,27 @@ import {FormsModule} from '@angular/forms';
   styleUrl: './room.component.css'
 })
 export class RoomComponent {
-  failMessage = signal<string>("")
 
-  constructor (private failureHandler: FailureHandler, private creationService : CreationService) {
+  failMessage = signal<string>("")
+  room = signal<Room>({
+    name:"",
+    id:0,
+    private:false,
+    hasTable:false,
+    hasBalcony :   false,
+    hasBin:false,
+    hasLocker : false,
+    hasPrivateShowerroom :false,
+    hasWardrobe:false,
+    hasWashtub:false,
+    }
+  )
+  rooms = signal<Array<Room>>([])
+
+  constructor(private failureHandler: FailureHandler, private roomService: RoomService, private creationService: CreationService) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     this.failureHandler.error$.subscribe(failMessage => {
       console.log("detec an error ", failMessage);
@@ -27,14 +42,21 @@ export class RoomComponent {
         this.failMessage.set(failMessage);
       }
     })
+    this.roomService.room$.subscribe(roomsData => {
+      this.rooms.set(roomsData);
+    })
 
-
+    await this.roomService.getRooms()
   }
 
   async onSubmit() {
-
-
+    if (this.room().name.replaceAll(" ","") == ""){
+      this.failMessage.set("Please enter a name");
+      return
+    }
+    await this.creationService.newRoom(this.room())
 
   }
+
 
 }

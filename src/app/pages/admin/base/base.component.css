@@ -10,7 +10,10 @@
   overflow-x: hidden;
 }
 .basePage .content{
+
   width: 96%;
   padding: 2%;
   box-sizing: border-box;
+  height: 100%;
+  padding-bottom: 0;
 }

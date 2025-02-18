@@ -1,13 +1,13 @@
-<div class="newRoomPage">
+<div class="newPage">
   <div>
     <h3>Ajout</h3>
   </div>
-  <div class="pageConten whiteContainerWithBordure">
+  <div class="pageContent whiteContainerWithBordure">
     <div class="multiChoice">
-      <span (click)="changeForm('booking')">Booking</span>
-      <span (click)="changeForm('room')">Room</span>
-      <span (click)="changeForm('bed')">Bed</span>
-      <span (click)="changeForm('overview')">Overview</span>
+      <span (click)="changeForm('booking')" [class.focus]="formToRender()=='booking'">Booking</span>
+      <span (click)="changeForm('room')" [class.focus]="formToRender()=='room'">Room</span>
+      <span (click)="changeForm('bed')" [class.focus]="formToRender()=='bed'">Bed</span>
+      <span (click)="changeForm('overview')" [class.focus]="formToRender()=='overview'">Overview</span>
     </div>
     <hr>
     @if (formToRender()==="booking"){

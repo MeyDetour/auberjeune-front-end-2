@@ -14,7 +14,7 @@ import {FailureHandler} from '../services/failureHandler';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private failureHandler: FailureHandler, private router: Router, private userService: UserService) {
+  constructor(private failureHandler: FailureHandler, private router: Router) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {

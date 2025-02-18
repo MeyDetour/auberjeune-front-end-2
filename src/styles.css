@@ -103,7 +103,7 @@ h3 {
 .button2 {
   background: var(--green);
   border: none;
-  border-radius: 30px;
+  border-radius: 10px;
   padding: 10px;
   box-sizing: border-box;
   color: var(--dash);
@@ -113,6 +113,17 @@ h3 {
 }
 .button2:hover {
   background: rgba(159, 205, 128, 0.92);
+}
+.button-grey {
+  background: #eae7e7;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  color: var(--dash);
+  cursor: pointer;
+  min-width: 80px;
+  font-size: 16px;
 }
 
 .greenPatch, .redPatch {
@@ -152,6 +163,8 @@ h3 {
 }
 
 
+/* multi choice */
+
 .multiChoice {
   display: flex;
   flex-direction: row;
@@ -165,7 +178,7 @@ h3 {
 
 .multiChoice .focus {
   color: var(--dash);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 
@@ -184,7 +197,7 @@ form {
   font-family: jost, sans-serif;
 }
 
-form div {
+form div ,form fieldset {
 
   display: flex;
   flex-direction: column;
@@ -225,8 +238,8 @@ form .form-check input {
   top: 0;
   left: 0;
   opacity: 0;
-  width: 0;
-  height: 0;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
 
 }
@@ -246,7 +259,7 @@ form .form-check:hover .checkmark {
 
 form .form-check input:checked ~ .checkmark {
   background: rgba(206, 242, 194, 0.92);
-  border: 1px solid var(--green);
+  border: 2px solid var(--green);
 }
 
 form .form-radio{
@@ -260,14 +273,16 @@ form .form-radio > div{
   flex-direction: row;
   align-items: center;
   position: relative;
+  cursor: pointer;
 
 }
 
 form .form-radio > div input{
   position: absolute;
   opacity: 0;
-  height: 0;
-  width: 0;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
 }
 
 
@@ -277,10 +292,12 @@ form .form-radio > div .radioMark{
   border-radius: 50%;
   width: 20px;
   height: 20px;
+  cursor: pointer;
 }
 
 form .form-radio > div:hover .radioMark {
   background: #f3eaea;
+  cursor: pointer;
 }
 
 
@@ -288,3 +305,14 @@ form .form-radio input:checked ~ .radioMark {
   background: rgba(206, 242, 194, 0.92);
   border: 1px solid var(--green);
 }
+
+form fieldset {
+
+  border: 1px solid #dbdbdb;
+  border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
+
+  padding-block: 32px;
+}
+

@@ -112,9 +112,11 @@
         <div class="vr"></div>
         <div class="bookings">
           @for (booking of bookings(); track booking.id) {
+
+          <!--     ONE BOOKING       -->
             <div class="booking whiteContainerWithBordure">
               <!-- header with num and date -->
-              <div class="header"><span style=" font-weight: 600;">#{{ booking.id }}</span><span> - </span><span>{{ booking.startDate }}</span></div>
+              <div class="header"><span style=" font-weight: 600;" [style.color]="booking.finished ? '#32a709' : 'var(--very-red)'">#{{ booking.id }}</span><span> - </span><span>{{booking.advencement}}</span><span> - </span><span>{{ booking.startDate }}</span></div>
 
               <!-- global row with informations  -->
               <div>
@@ -153,7 +155,7 @@
               </div>
             </div>
           }
-
+          <!--    END OF ONE BOOKING       -->
         </div>
       </div>
     </div>

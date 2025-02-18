@@ -1,5 +1,8 @@
 
 <form action="" #form="ngForm" class="" (submit)="onSubmit()">
+  @if(failMessage()){
+    <span style="color: red">{{failMessage()}}</span>
+  }
   <div>
     <label for="number">Name or Number</label>
     <input type="text" id="number" name="number" [(ngModel)]="bed().number">
