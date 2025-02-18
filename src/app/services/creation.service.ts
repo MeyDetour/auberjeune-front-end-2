@@ -6,6 +6,7 @@ import {Bed} from '../model/Bed.type';
 import {env} from '../environment/environment';
 import {Router} from '@angular/router';
 import {ToastService} from 'angular-toastify';
+import {Booking} from '../model/Booking.type';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,11 @@ export class CreationService {
 
   async newRoom(room: Room) {
     this.http.post<Room>(this.url + 'api/room/new', room).subscribe(response => {
+      console.log(response);
+      this.successFullCreation();
+   })
+  }async newBooking(booking: Booking) {
+    this.http.post(this.url + 'api/booking/new', booking).subscribe(response => {
       console.log(response);
       this.successFullCreation();
    })

@@ -1,1 +1,28 @@
-<p>overview-beds-and-rooms works!</p>
+<div class="overview">
+@for (room of roomsAndBeds(); track room.id) {
+  <div class="whiteContainerWithBordure">
+    <div>
+      <span style="cursor: pointer" (click)="editRoom(room.id)">{{ room.name }}</span>
+      @if(room.private){
+        <img src="/svg/cadna.svg" alt="">
+      }
+    </div>
+
+    <div class="bedsContainer">
+      @for (bed of room.beds; track bed.id) {
+        <span (click)="editBed(bed.id)" [class.greenPatch]="!bed.occupied" [class.redPatch]="bed.occupied">{{ bed.number }}</span>
+      }
+    </div>
+
+  </div>
+
+}
+</div>
+
+@if (bedIdToEdit != 0  && renderEditionForm()){
+  <app-bed [bedId]="bedIdToEdit" (closeEvent)="closeEdition()" ></app-bed>
+}
+
+@if (roomIdToEdit != 0  && renderEditionForm()){
+  <app-room [roomId]="roomIdToEdit" (closeEvent)="closeEdition()" ></app-room>
+}

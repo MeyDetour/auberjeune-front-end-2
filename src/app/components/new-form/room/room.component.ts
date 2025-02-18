@@ -36,6 +36,7 @@ export class RoomComponent {
 
   async ngOnInit() {
 
+    this.failMessage.set("")
     this.failureHandler.error$.subscribe(failMessage => {
       console.log("detec an error ", failMessage);
       if (failMessage) {

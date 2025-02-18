@@ -75,8 +75,7 @@ export class BedComponent {
 
 
   async save() {
-    console.log(this.bed)
-    console.log(this.bed())
+
     await this.bedService.updateBed(this.bed())
     this.close()
   }

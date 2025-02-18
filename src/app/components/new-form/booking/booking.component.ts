@@ -19,23 +19,23 @@ export class BookingComponent {
   failMessage = signal<string>("")
   newBooking = signal<Booking>({
     id: 0,
-    startDate: "",
-    endDate: "",
-    phoneNumber: "",
-    mail: "",
+    startDate: "2025-07-25T00:00",
+    endDate: "2025-07-27T14:00",
+    phoneNumber: "041541545",
+    mail: "test@gmail.com",
     finished: false,
     advencement: " ",
     wantPrivateRoom: false,
     clients: []
   })
-  mainClient = signal<Client>({firstName: '', lastName: '', birthDate: ''});
+  mainClient = signal<Client>({firstName: 'John', lastName: 'Doe', birthDate: '2005-10-27'});
   clientsList = signal<Client[]>([])
 
   constructor(private dateTransformer: DateService, private failureHandler: FailureHandler, private creationService: CreationService) {
   }
 
   ngOnInit() {
-
+this.failMessage.set("")
     this.failureHandler.error$.subscribe(failMessage => {
       console.log("detec an error ", failMessage);
       if (failMessage) {
@@ -86,6 +86,7 @@ formatedData.clients= []
     let birthDate: any = this.dateTransformer.formatDate(this.mainClient().birthDate,"date")
     if (firstname == '' || lastName == '' || !birthDate) {
       this.failMessage.set("Please complete first name, last name and birthdate for the main client : "+firstname+" "+lastName+ " "+birthDate)
+    return
     }
     formatedData.mainClient = {firstName: firstname, lastName: lastName, birthDate: birthDate};
 
@@ -96,13 +97,12 @@ formatedData.clients= []
       let birthDate: any = this.dateTransformer.formatDate(client.birthDate,"date")
       if (firstname == '' || lastName == '' || !birthDate) {
         this.failMessage.set("Please complete first name, last name and birthdate for client")
+    return;
       }
       formatedData.clients.push( {firstName: firstname, lastName: lastName, birthDate: birthDate})
     })
 
-
-    console.log(formatedData)
-
+ await this.creationService.newBooking(formatedData)
   }
 
 }

@@ -1,0 +1,38 @@
+
+/* ======== Room and bed list ====== */
+
+.overview{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding-right: 30px;
+  height: 92%;
+  overflow-y: auto;
+}
+
+/* room list */
+.overview > div{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
+}
+
+
+/* bed list */
+.overview > div >div{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.overview > div > .bedsContainer > span{
+  font-size: 15px;
+  padding: 9px 24px !important;
+  box-sizing: border-box;
+}
+
+.overview .redPatch,.overview .greenPatch{
+  cursor: pointer;
+}

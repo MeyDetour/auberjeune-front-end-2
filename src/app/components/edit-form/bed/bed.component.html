@@ -6,10 +6,10 @@
     <div class="whiteContainerWithBordure">
       <div class="header">
 
-        <h3 class="titleOfForm">Edit Bed {{ bed().id }}</h3>
+        <h3 class="titleOfForm">Edit Bed  #{{ bed().id }} : {{ bed().number }}</h3>
 
       <div>
-        <button (click)="save()" class="button2">
+        <button (click)="save()" class="buttonGreen">
           Save
         </button>
         <svg class="croix" style="cursor: pointer" (click)="close()" width="32" height="32" viewBox="0 0 32 32" fill="none"
@@ -116,7 +116,7 @@
           <!--     ONE BOOKING       -->
             <div class="booking whiteContainerWithBordure">
               <!-- header with num and date -->
-              <div class="header"><span style=" font-weight: 600;" [style.color]="booking.finished ? '#32a709' : 'var(--very-red)'">#{{ booking.id }}</span><span> - </span><span>{{booking.advencement}}</span><span> - </span><span>{{ booking.startDate }}</span></div>
+              <div class="header"><span style=" font-weight: 600;" [style.color]="booking.finished ? 'var(--very-red)'  : '#32a709'">#{{ booking.id }}</span><span> - </span><span>{{booking.advencement}}</span><span> - </span><span>{{ booking.startDate }}</span></div>
 
               <!-- global row with informations  -->
               <div>
