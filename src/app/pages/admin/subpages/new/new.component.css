@@ -1,0 +1,15 @@
+.newPage{
+  height: 100%;
+
+}
+.newPage > div:first-child{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  height: 10%;
+}
+
+.pageContent{
+height: 90%;
+  overflow-y: auto;
+}

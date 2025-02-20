@@ -1,0 +1,36 @@
+<div class="basePage">
+  @if (page) {
+
+
+      <!--    nav    -->
+      <app-navbar-admin [page]="page"></app-navbar-admin>
+
+
+    <div class="content">
+      <!--     subpages       -->
+
+      @if (page === "new") {
+     <app-new></app-new>
+      }
+
+
+
+      @if (page === "dashboard") {
+        <app-dashboard></app-dashboard>
+      }
+
+      @else if (page === "manage") {
+        <app-manage></app-manage>
+      }
+
+
+      @else if (page === "settings") {
+        <app-settings></app-settings>
+      }
+    </div>
+
+
+
+  }
+
+</div>

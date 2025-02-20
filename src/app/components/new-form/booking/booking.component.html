@@ -1,0 +1,87 @@
+<form action="" #form="ngForm" class="" (submit)="onSubmit()">
+  @if (failMessage()) {
+    <span style="color: red">{{ failMessage() }}</span>
+  }
+  <div class="form-date">
+    <div>
+      <label for="startDate">Start date</label>
+      <input type="datetime-local" id="startDate" name="startDate" [(ngModel)]="newBooking().startDate">
+    </div>
+    <div>
+      <label for="endDate">End date</label>
+      <input type="datetime-local" id="endDate" name="endDate" [(ngModel)]="newBooking().endDate">
+    </div>
+
+  </div>
+  <div class="">
+    <label for="mail">Mail</label>
+    <input type="text" [(ngModel)]="newBooking().mail" [checked]="newBooking().mail" name="mail" id="mail">
+  </div>
+  <div class=""><label for="phoneNumber">Phone Number</label>
+    <input type="text" [(ngModel)]="newBooking().phoneNumber" [checked]="newBooking().phoneNumber" name="phoneNumber"
+           id="phoneNumber">
+
+  </div>
+
+
+  <fieldset class="">
+    <legend>Main client (major)</legend>
+    <div class="form-identityOfOneClient">
+      <div>
+        <label for="mainClientFirstName">First name</label>
+        <input type="text" [(ngModel)]="mainClient().firstName" [checked]="mainClient().firstName"
+               name="mainClientFirstName"
+               id="mainClientFirstName">
+      </div>
+      <div>
+        <label for="mainClientLastName">Last name</label>
+        <input type="text" [(ngModel)]="mainClient().lastName" [checked]="mainClient().lastName"
+               name="mainClientLastName"
+               id="mainClientLastName">
+      </div>
+      <div>
+        <label for="mainClientBirhtDate">Birth date</label>
+        <input type="date" [(ngModel)]="mainClient().birthDate" [checked]="mainClient().birthDate"
+               name="mainClientBirhtDate"
+               id="mainClientBirhtDate">
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Autres clients</legend>
+    @for (client of clientsList(); track $index) {
+      <div class="form-identityOfOneClient">
+        <div>
+          <label for="oneClientFirstName">First name</label>
+          <input type="text" [(ngModel)]="client.firstName" [checked]="client.firstName"
+                 name="oneClientFirstName"
+                 id="oneClientFirstName">
+        </div>
+        <div>
+          <label for="oneClientLastName">Last name</label>
+          <input type="text" [(ngModel)]="client.lastName" [checked]="client.lastName"
+                 name="oneClientLastName"
+                 id="oneClientLastName">
+        </div>
+        <div>
+          <label for="oneClientBirthDate">Birth date</label>
+          <input type="date" [(ngModel)]="client.birthDate" [checked]="client.birthDate"
+                 name="oneClientBirthDate"
+                 id="oneClientBirthDate">
+        </div>
+      </div>
+    }
+    <span class="buttonGrey" (click)="addClientToClientList()">Add one</span>
+
+
+  </fieldset>
+
+  <div class="form-check">
+    <input type="checkbox" [(ngModel)]="newBooking().wantPrivateRoom" [checked]="newBooking()['wantPrivateRoom']"
+           name="wantPrivateRoom" id="wantPrivateRoom">
+    <span class="checkmark"></span>
+    <label for="wantPrivateRoom">Client wantPrivateRoom</label>
+  </div>
+
+  <button type="submit" class="buttonGreen">Search</button>
+</form>

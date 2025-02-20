@@ -1,0 +1,57 @@
+<div class="managePage">
+  <div>
+    <h3>Dashboard</h3>
+  </div>
+  <div class="pageContent">
+
+    <app-filling></app-filling>
+
+    <div class="whiteContainerWithBordure">
+      <div class="multiChoice">
+        <span (click)="changeSection('tocome')" [class.focus]="section()=='tocome'">To come</span>
+        <span (click)="changeSection('today')" [class.focus]="section()=='today'">Today</span>
+        <span (click)="changeSection('passed')" [class.focus]="section()=='passed'">Passed</span>
+        <span (click)="changeSection('all')" [class.focus]="section()=='all'">All</span>
+      </div>
+      <hr>
+      @if (bookings().length == 0) {
+        <span>No bookings...</span>
+      } @else {
+        <header class="rowForBooking">
+         <div>
+           <span>ID</span>
+           <span>Booking Date</span>
+           <span>Clients</span>
+           <span>Phone number</span>
+           <span>E-mail</span>
+         </div>
+
+        </header>
+        @for (booking of bookings(); track booking.id) {
+        <div class="rowForBooking">
+         <div>
+           <span>#{{ booking.id }}</span>
+           <span>{{booking.startDate}} - {{booking.endDate}}</span>
+           <span>{{booking.clientsNumber}}</span>
+           <span>{{booking.phoneNumber}}</span>
+           <span>{{booking.mail}}</span>
+         </div>
+
+          <div (click)="renderFormForBooking(booking.id)" class="iconSettings">
+            <img src="/svg/edit.svg" alt="">
+          </div>
+        </div>
+        }
+      }
+
+
+    </div>
+
+  </div>
+
+
+</div>
+
+@if(bookingId() && renderForm()){
+  <app-booking (closeEvent)="closeEdition()" [bookingID]="bookingId()"></app-booking>
+}

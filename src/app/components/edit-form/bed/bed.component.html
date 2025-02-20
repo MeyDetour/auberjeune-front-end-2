@@ -1,0 +1,169 @@
+@if (bed() && bookings()) {
+
+  <div class="editBedPage backgroundPage" (click)="onBackgroundClick($event)">
+
+
+    <div class="whiteContainerWithBordure">
+      <div class="header">
+
+        <h3 class="titleOfForm">Edit Bed  #{{ bed().id }} : {{ bed().number }}</h3>
+
+      <div>
+        <button (click)="save()" class="buttonGreen">
+          Save
+        </button>
+        <svg class="croix" style="cursor: pointer" (click)="close()" width="32" height="32" viewBox="0 0 32 32" fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M25.7076 24.2926C25.8005 24.3855 25.8742 24.4958 25.9245 24.6172C25.9747 24.7386 26.0006 24.8687 26.0006 25.0001C26.0006 25.1315 25.9747 25.2616 25.9245 25.383C25.8742 25.5044 25.8005 25.6147 25.7076 25.7076C25.6147 25.8005 25.5044 25.8742 25.383 25.9245C25.2616 25.9747 25.1315 26.0006 25.0001 26.0006C24.8687 26.0006 24.7386 25.9747 24.6172 25.9245C24.4958 25.8742 24.3855 25.8005 24.2926 25.7076L16.0001 17.4138L7.70757 25.7076C7.51993 25.8952 7.26543 26.0006 7.00007 26.0006C6.7347 26.0006 6.48021 25.8952 6.29257 25.7076C6.10493 25.5199 5.99951 25.2654 5.99951 25.0001C5.99951 24.7347 6.10493 24.4802 6.29257 24.2926L14.5863 16.0001L6.29257 7.70757C6.10493 7.51993 5.99951 7.26543 5.99951 7.00007C5.99951 6.7347 6.10493 6.48021 6.29257 6.29257C6.48021 6.10493 6.7347 5.99951 7.00007 5.99951C7.26543 5.99951 7.51993 6.10493 7.70757 6.29257L16.0001 14.5863L24.2926 6.29257C24.4802 6.10493 24.7347 5.99951 25.0001 5.99951C25.2654 5.99951 25.5199 6.10493 25.7076 6.29257C25.8952 6.48021 26.0006 6.7347 26.0006 7.00007C26.0006 7.26543 25.8952 7.51993 25.7076 7.70757L17.4138 16.0001L25.7076 24.2926Z"
+            fill="black" style="fill:black;fill-opacity:1;"/>
+        </svg>
+      </div>
+
+      </div>
+      <div class="body">
+
+        <form action="" #form="ngForm" class="">
+          @if(failMessage()){
+            <span style="color: red">{{failMessage()}}</span>
+          }
+          <div>
+            <label for="number">Name or Number</label>
+            <input type="text" id="number" name="number" [(ngModel)]="bed().number">
+          </div>
+          <div>
+            <label for="room">Room</label>
+            <select [(ngModel)]="bed().roomId"  name="room" id="room">
+              @for (room of rooms(); track room.id) {
+                <option [selected]="bed()?.roomId === room.id" value="{{room.id}}">{{ room.name }}</option>
+              }
+            </select>
+          </div>
+          <div>
+            <label for="state">State</label>
+            <select name="state" [(ngModel)]="bed().state" id="state">
+              <option [selected]="bed()?.state ==='deleted'" value="inspected">Inspected</option>
+              <option [selected]="bed()?.state === 'blocked'" value="blocked">Blocked</option>
+              <option [selected]="bed()?.state === 'cleaned'" value="cleaned">Cleaned</option>
+              <option [selected]="bed()?.state === 'notcleaned'" value="notCleaned">Not cleaned</option>
+            </select>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" [(ngModel)]="bed().occupied" [checked]="bed()['occupied']" name="occupied" id="occupied">
+            <span class="checkmark"></span>
+            <label for="occupied">Bed is occupied </label>
+          </div>
+          <div class="form-check" >
+            <input type="checkbox" [(ngModel)]="bed().sittingApart" [checked]="bed()['sittingApart']" name="sittingApart" id="sittingApart">
+            <span class="checkmark"></span>
+            <label for="sittingApart">Bed is sitting apart </label>
+          </div>
+          <div class="form-check" >
+
+            <input type="checkbox" [(ngModel)]="bed().hasLamp" [checked]="bed()['hasLamp']" name="hasLamp" id="hasLamp">
+            <span class="checkmark"></span>
+            <label for="hasLamp">Bed has lamp</label>
+          </div>
+          <div class="form-check">
+
+            <input type="checkbox" [(ngModel)]="bed().doubleBed" [checked]="bed()['doubleBed']" name="doubleBed" id="doubleBed">
+            <span class="checkmark"></span>
+            <label for="doubleBed">Bed is double bed </label>
+          </div>
+          <div class="form-check"  >
+
+            <input type="checkbox" [(ngModel)]="bed().hasLittleStorage" [checked]="bed()['hasLittleStorage']" name="hasLittleStorage" id="hasLittleStorage">
+            <span class="checkmark"></span>
+            <label for="hasLittleStorage">Bed has little storage</label>
+          </div>
+          <div class="form-check"  >
+
+            <input type="checkbox" [(ngModel)]="bed().hasShelf" [checked]="bed()['hasShelf']" name="hasShelf" id="hasShelf">
+            <span class="checkmark"></span>
+            <label for="hasShelf">Bed has shelf</label>
+          </div>
+          <div class="form-check"  >
+
+            <input type="checkbox" [(ngModel)]="bed().reservable" [checked]="bed()['reservable']" name="reservable"  id="reservable">
+            <span class="checkmark"></span>
+            <label for="reservable">Bed is reservable</label>
+          </div>
+          <div class="form-radio">
+
+            <div  >
+              <input [checked]="bed()['bedShape']=='singleBed'" type="radio" id="singleBed" name="bedShape"
+                     value="singleBed"/>
+              <span class="radioMark"></span>
+              <label for="singleBed">Single bed</label>
+            </div>
+            <div >
+              <input type="radio" [checked]="bed()['bedShape']=='topBed'" id="topBed" name="bedShape" value="topBed"
+                     checked/>
+              <span class="radioMark"></span>
+              <label for="topBed">Top bed</label>
+            </div>
+
+            <div >
+              <input type="radio" [checked]="bed()['bedShape']=='bottomBed'" id="bottomBed" name="bedShape"
+                     value="bottomBed"/>
+              <span class="radioMark"></span>
+              <label for="bottomBed">Bottom bed</label>
+            </div>
+
+          </div>
+        </form>
+        <div class="vr"></div>
+        <div class="bookings">
+          @for (booking of bookings(); track booking.id) {
+
+          <!--     ONE BOOKING       -->
+            <div class="booking whiteContainerWithBordure">
+              <!-- header with num and date -->
+              <div class="header"><span style=" font-weight: 600;" [style.color]="booking.finished ? 'var(--very-red)'  : '#32a709'">#{{ booking.id }}</span><span> - </span><span>{{booking.advencement}}</span><span> - </span><span>{{ booking.startDate }}</span></div>
+
+              <!-- global row with informations  -->
+              <div>
+
+                <!-- first column -->
+                <div>
+                  <!-- first element -->
+                  <div>
+                    <img src="/svg/profile.svg" alt="">
+                    <span>{{ booking.clientsNumber }}  People</span>
+                  </div>
+
+                  <!-- second element-->
+                  <div>
+                    <img src="/svg/watch.svg" alt="">
+                    <span>{{ booking.startDate }} - {{ booking.endDate }}</span>
+                  </div>
+
+                </div>
+
+                <!-- second column-->
+                <div>
+                  <!-- first element -->
+                  <div>
+                    <img src="/svg/phone.svg" alt="">
+                    <span>{{ booking.phoneNumber }}</span>
+                  </div>
+
+                  <!-- second element-->
+                  <div>
+                    <img src="/svg/mail.svg" alt="">
+                    <span>{{ booking.mail }}</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          }
+          <!--    END OF ONE BOOKING       -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+} @else {
+  <app-loader></app-loader>
+}

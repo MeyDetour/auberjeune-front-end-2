@@ -1,0 +1,68 @@
+.filter{
+  display: flex;
+  flex-direction: row;
+  margin-block: 25px;
+  gap: 50px;
+}
+.filter >img{
+  cursor: pointer;
+  height: 22px;
+}
+.filter select{
+
+  font-size: 16px;
+  color: var(--dark-grey-text);
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-size: 20px;
+  border-bottom: 1px solid #d2d1d1;
+}
+.filter select:focus-visible{
+  border: none;
+
+  outline: none;
+  background: #f6f6f6;
+}
+
+.filter input{
+
+  border: 0;
+  font-size: 16px;
+  color: var(--dark-grey-text);
+}
+/* ======== Room and bed list ====== */
+
+.overview{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding-right: 30px;
+}
+
+/* room list */
+.overview > div{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
+}
+
+
+/* bed list */
+.overview > div >div{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.overview > div > .bedsContainer > span{
+  font-size: 15px;
+  padding: 9px 24px !important;
+  box-sizing: border-box;
+}
+
+.overview .redPatch,.overview .greenPatch{
+  cursor: pointer;
+}

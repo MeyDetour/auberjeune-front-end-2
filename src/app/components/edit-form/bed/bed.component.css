@@ -1,0 +1,79 @@
+
+
+/* body */
+
+.editBedPage> .whiteContainerWithBordure  .body{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 90%;
+}
+form{
+  height:100%;
+  width: 48%;
+  overflow-y: auto;
+  gap: 20px;
+  padding-right: 3%;
+  box-sizing: border-box;
+}
+form div{
+  align-items: start;
+}
+form .form-check{
+  margin-block: 5px;
+}
+.vr{
+  height: 100%;
+  width: 2px;
+  background: #e4e4e4;
+}
+
+.bookings{
+  display: flex;
+  flex-direction: column;
+  height:100%;
+  width: 48%;
+  overflow-y: auto;
+  gap: 20px;
+  padding-right: 3%;
+  box-sizing: border-box;
+}
+
+.bookings .booking{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  background: transparent;
+  gap: 15px;
+}
+
+/* row */
+.bookings .booking> div:last-child{
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+}
+
+
+
+/* column */
+.bookings .booking> div > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 56%;
+}
+
+.bookings .booking> div > div:last-child {
+  width: 41%;
+}
+  /* data in column*/
+.bookings .booking> div > div>div {
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 7px;
+}

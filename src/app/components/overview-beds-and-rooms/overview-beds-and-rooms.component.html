@@ -1,0 +1,53 @@
+<div class="filter">
+  <img (click)="restoreOriginalRoomsAndBedState()" src="/svg/reload.svg" alt="">
+  <div>
+    <span>Occupation :   </span>
+    <select name="occupation" id="occupation" (change)="changeOccupation($event)">
+      <option value="all">All</option>
+      <option value="occupied">Occupied</option>
+      <option value="free">Free</option>
+    </select>
+  </div>
+  <div>
+    <span>Room Type :   </span>
+    <select name="room" id="room" (change)="changeRoom($event)">
+      <option value="all">All</option>
+      <option value="public">Public</option>
+      <option value="private">Private</option>
+    </select>
+  </div>
+  <div>
+    <span>Taken at date : </span>
+    <input (change)="changeTakenAtDate($event)" type="datetime-local">
+  </div>
+</div>
+<div class="overview">
+
+  @for (room of roomsAndBeds(); track room.id) {
+    <div class="whiteContainerWithBordure">
+      <div>
+        <span style="cursor: pointer" (click)="editRoom(room.id)">{{ room.name }}</span>
+        @if (room.private) {
+          <img src="/svg/cadna.svg" alt="">
+        }
+      </div>
+
+      <div class="bedsContainer">
+        @for (bed of room.beds; track bed.id) {
+          <span [class.unreservableBed]="!bed.reservable" (click)="editBed(bed.id)" [class.greenPatch]="!bed.occupied"
+                [class.redPatch]="bed.occupied">{{ bed.number }}</span>
+        }
+      </div>
+
+    </div>
+
+  }
+</div>
+
+@if (bedIdToEdit != 0 && renderEditionForm()) {
+  <app-bed [bedId]="bedIdToEdit" (closeEvent)="closeEdition()"></app-bed>
+}
+
+@if (roomIdToEdit != 0 && renderEditionForm()) {
+  <app-room [roomId]="roomIdToEdit" (closeEvent)="closeEdition()"></app-room>
+}

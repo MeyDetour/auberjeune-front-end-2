@@ -1,0 +1,56 @@
+
+<form action="" #form="ngForm" class="" (submit)="onSubmit()">
+ @if(failMessage()){
+   <span style="color: red">{{failMessage()}}</span>
+ }
+  <div>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" [(ngModel)]="room().name">
+  </div>
+
+  <div class="form-check"  >
+    <input type="checkbox" [(ngModel)]="room().private" [checked]="room()['private']" name="private" id="private">
+    <span class="checkmark"></span>
+    <label for="private">Room is private</label>
+  </div>
+  <div class="form-check"  >
+
+    <input type="checkbox" [(ngModel)]="room().hasTable" [checked]="room().hasTable" name="hasTable" id="hasTable">
+    <span class="checkmark"></span>
+    <label for="hasTable">Bed has table</label>
+  </div>
+  <div class="form-check"  >
+
+    <input type="checkbox" [(ngModel)]="room().hasBalcony" [checked]="room().hasBalcony" name="hasBalcony" id="hasBalcony">
+    <span class="checkmark"></span>
+    <label for="hasBalcony">Bed has balcony </label>
+  </div>
+  <div class="form-check"  >
+
+    <input type="checkbox" [(ngModel)]="room().hasBin" [checked]="room().hasBin" name="hasBin" id="hasBin">
+    <span class="checkmark"></span>
+    <label for="hasBin">Bed has bin</label>
+  </div>
+  <div class="form-check"  >
+
+    <input type="checkbox" [(ngModel)]="room().hasLocker" [checked]="room().hasLocker" name="hasLocker" id="hasLocker">
+    <span class="checkmark"></span>
+    <label for="hasLocker">Bed has locker</label>
+  </div>
+  <div class="form-check"  >
+    <input type="checkbox" [(ngModel)]="room().hasPrivateShowerroom" [checked]="room().hasPrivateShowerroom" name="hasPrivateShowerroom"  id="hasPrivateShowerroom">
+    <span class="checkmark"></span>
+    <label for="hasPrivateShowerroom">Bed is has PrivateShowerroom</label>
+  </div>
+  <div class="form-check"  >
+    <input type="checkbox" [(ngModel)]="room().hasWashtub" [checked]="room().hasWashtub" name="hasWashtub"  id="hasWashtub">
+    <span class="checkmark"></span>
+    <label for="hasWashtub">Bed is has washtub</label>
+  </div>
+  <div class="form-check"  >
+    <input type="checkbox" [(ngModel)]="room().hasWardrobe" [checked]="room().hasWardrobe" name="hasWardrobe"  id="hasWardrobe">
+    <span class="checkmark"></span>
+    <label for="hasWardrobe">Bed is has wardrobe</label>
+  </div>
+  <button class="buttonGreen">Créer</button>
+</form>

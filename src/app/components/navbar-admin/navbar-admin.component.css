@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+.jost {
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.navbar {
+
+  height: 100%;
+  width: 4vw;
+  background: var(--white);
+  border: #E7EBF0 2px solid;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 21px;
+}
+
+.navbar > img {
+  width: 100%;
+  object-fit: contain;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.navbar hr {
+  border-color: #DEDEDE !important;
+  /* border: 17px; */
+  width: 50%;
+
+}
+
+.navbar ul {
+
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 93%;
+}
+
+nav ul li {
+  width: 100%;
+}
+
+nav ul a {
+  width: 100%;
+  position: relative;
+  padding: 5px 20px;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.navbar ul  svg {
+
+  width: 100%;
+  height: fit-content;
+}
+
+.navbar ul li a .selector{
+  position: absolute;
+  background: var(--orange);
+  height: 50px;
+  width: 3px;
+  left: -4%;
+  border-radius: 0 20px 20px 0;
+  top: 50%;
+  transform: translateY(-50%);
+}

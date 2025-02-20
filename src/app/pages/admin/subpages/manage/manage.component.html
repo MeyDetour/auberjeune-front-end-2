@@ -1,0 +1,42 @@
+<div class="managePage">
+  <div>
+    <h3>Manage</h3>
+    <button class="buttonYellow">Start Housekeeping</button>
+  </div>
+  <div class="pageContent">
+
+    <app-filling></app-filling>
+
+    <div>
+      <div class="legend">
+        <span class="greenPatch">Available</span>
+        <span class="redPatch">Taken</span>
+        <p>You can change this status by clicking on it.</p>
+      </div>
+
+      <div class="rooms">
+        @for (room of roomsAndBeds(); track room.id) {
+          <div class="whiteContainerWithBordure">
+            <span>{{ room.name }}</span>
+            <div>
+              @for (bed of room.beds; track bed.id) {
+                <span [class.unreservableBed]="!bed.reservable"  (click)="editBed(bed.id)" [class.greenPatch]="!bed.occupied" [class.redPatch]="bed.occupied">{{ bed.number }}</span>
+              }
+            </div>
+
+          </div>
+
+        }
+      </div>
+    </div>
+
+  </div>
+
+
+
+</div>
+
+
+@if (bedIdToEdit != 0  && renderEditionForm()){
+  <app-bed [bedId]="bedIdToEdit" (closeEvent)="closeEdition()" ></app-bed>
+}
