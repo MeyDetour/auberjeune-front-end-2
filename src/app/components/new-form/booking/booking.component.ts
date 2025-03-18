@@ -1,11 +1,10 @@
-import {Component, signal} from '@angular/core';
+import {Component, output, signal} from '@angular/core';
 import {FailureHandler} from '../../../services/failureHandler';
-import {CreationService} from '../../../services/creation.service';
 import {FormsModule} from "@angular/forms";
 import {Booking} from '../../../model/Booking.type';
-import moment from 'moment';
 import {DateService} from '../../../services/date.service';
 import {Client} from '../../../model/Client';
+import {BookingService} from '../../../services/booking.service';
 
 @Component({
   selector: 'app-booking',
@@ -28,10 +27,10 @@ export class BookingComponent {
     wantPrivateRoom: false,
     clients: []
   })
-  mainClient = signal<Client>({firstName: 'John', lastName: 'Doe', birthDate: '2005-10-27'});
+  mainClient = signal<Client>({firstName: 'John', lastName: 'Doe', birthDate: ""});
   clientsList = signal<Client[]>([])
 
-  constructor(private dateTransformer: DateService, private failureHandler: FailureHandler, private creationService: CreationService) {
+  constructor(private bookingService: BookingService, private dateTransformer: DateService, private failureHandler: FailureHandler) {
   }
 
   ngOnInit() {
@@ -51,21 +50,20 @@ export class BookingComponent {
   }
 
   async onSubmit() {
+
+    console.log(this.newBooking());
+    console.log(this.mainClient());
+
     // final data
     let formatedData = structuredClone(this.newBooking());
     formatedData.clients = []
-
     // verify data of booking
-    let formatedStartDate: any = this.dateTransformer.formatDate(this.newBooking().startDate, "datetime")
-    let formatedEndDate: any = this.dateTransformer.formatDate(this.newBooking().endDate, "datetime")
+    let formatedStartDate: any = this.dateTransformer.verifyDate(this.newBooking().startDate, "datetime")
+    let formatedEndDate: any = this.dateTransformer.verifyDate(this.newBooking().endDate, "datetime")
     if (!formatedStartDate || !formatedEndDate) {
       this.failMessage.set("Please enter valid start date and end date");
       return;
     }
-    // must add to formated data
-    formatedData.startDate = formatedStartDate
-    formatedData.endDate = formatedEndDate
-
 
     const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
     if (!emailPattern.test(this.newBooking().mail)) {
@@ -81,28 +79,43 @@ export class BookingComponent {
     // already in final data
 
     // verify data for the main client
-    let firstname = this.mainClient().firstName.replaceAll(" ", "")
-    let lastName = this.mainClient().lastName.replaceAll(" ", "")
-    let birthDate: any = this.dateTransformer.formatDate(this.mainClient().birthDate, "date")
-    if (firstname == '' || lastName == '' || !birthDate) {
-      this.failMessage.set("Please complete first name, last name and birthdate for the main client : " + firstname + " " + lastName + " " + birthDate)
+    this.mainClient().firstName = this.mainClient().firstName.replaceAll(" ", "")
+    this.mainClient().lastName = this.mainClient().lastName.replaceAll(" ", "")
+    this.mainClient().birthDate = this.dateTransformer.verifyDate(this.mainClient().birthDate, "date")
+
+    if (this.mainClient().firstName == '' || this.mainClient().lastName == '') {
+      this.failMessage.set("Please complete first name and last name  for the main client")
       return
     }
-    formatedData.mainClient = {firstName: firstname, lastName: lastName, birthDate: birthDate};
+    if (!this.mainClient().birthDate) {
+      this.failMessage.set("Please enter a valid birthdate for the main client")
+      return
+    }
+     formatedData.mainClient = this.mainClient();
+
 
     // verify data for each client of client list
     this.clientsList().forEach((client: Client) => {
-      let firstname = client.firstName.replaceAll(" ", "")
-      let lastName = client.lastName.replaceAll(" ", "")
-      let birthDate: any = this.dateTransformer.formatDate(client.birthDate, "date")
-      if (firstname == '' || lastName == '' || !birthDate) {
-        this.failMessage.set("Please complete first name, last name and birthdate for client")
+      client.firstName = client.firstName.replaceAll(" ", "")
+      client.lastName = client.lastName.replaceAll(" ", "")
+      client.birthDate = this.dateTransformer.verifyDate(client.birthDate, "date")
+      if (client.firstName || client.lastName) {
+        this.failMessage.set("Please complete first name, last name for client")
         return;
       }
-      formatedData.clients.push({firstName: firstname, lastName: lastName, birthDate: birthDate})
+      if (!client.birthDate) {
+        this.failMessage.set("Please entre valid birthdate for client")
+        return;
+      }
+
+      formatedData.clients.push(client)
     })
 
-    await this.creationService.newBooking(formatedData)
+    console.log(this.newBooking());
+    console.log(this.mainClient());
+
+    console.log("data to send :",formatedData)
+    await this.bookingService.newBooking(formatedData)
   }
 
 }
