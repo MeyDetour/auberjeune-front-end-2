@@ -1,6 +1,4 @@
 import {Component, signal} from '@angular/core';
-import {FailureHandler} from '../../../services/failureHandler';
-import {CreationService} from '../../../services/creation.service';
 import {BookingService} from '../../../services/booking.service';
 import {NgStyle} from '@angular/common';
 import {Filling} from '../../../model/Filling.type';
@@ -26,6 +24,9 @@ export class FillingComponent {
   })
 
   constructor(private bookingService: BookingService) {
+    this.bookingService.filling$.subscribe(filling => {
+      this.filling.set(filling);
+    })
   }
 
   async ngOnInit() {
@@ -33,14 +34,11 @@ export class FillingComponent {
       this.filling.set(fillingData);
     })
 
+    this.bookingService.getFillingState()
 
-    await this.getFillingData()
 
   }
 
-  async getFillingData() {
-    this.bookingService.getFillingStateSource()
-  }
 
   protected readonly parseInt = parseInt;
   protected readonly toString = toString;
