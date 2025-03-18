@@ -9,7 +9,7 @@
         <h3 class="titleOfForm">Edit Room #{{ room().id }} : {{room().name}}</h3>
 
         <div>
-          @if(room()?.beds && room().beds?.length === 0 ){
+          @if(room().beds && room().beds?.length === 0 ){
           <button (click)="delete()" class="buttonRed">
             Delete
           </button>
