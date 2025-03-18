@@ -1,6 +1,5 @@
 import {Component, signal} from '@angular/core';
 import {FailureHandler} from '../../../services/failureHandler';
-import {CreationService} from '../../../services/creation.service';
 import {FormsModule} from '@angular/forms';
 import {Room} from '../../../model/Room.type';
 import {RoomService} from '../../../services/room.service';
@@ -31,7 +30,7 @@ export class RoomComponent {
   )
   rooms = signal<Array<Room>>([])
 
-  constructor(private failureHandler: FailureHandler, private roomService: RoomService, private creationService: CreationService) {
+  constructor(private failureHandler: FailureHandler, private roomService: RoomService ) {
   }
 
   async ngOnInit() {
@@ -55,7 +54,7 @@ export class RoomComponent {
       this.failMessage.set("Please enter a name");
       return
     }
-    await this.creationService.newRoom(this.room())
+    await this.roomService.newRoom(this.room())
 
   }
 
