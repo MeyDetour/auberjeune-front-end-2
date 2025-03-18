@@ -14,6 +14,11 @@ export class FailureHandler {
 
 
   setError(error: string) {
+    if (error=="") {
+
+      this.errorSource.next(error);
+      return;
+    }
     this.errorSource.next(error);
     this.toast.error(error);
   }
