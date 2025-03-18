@@ -1,10 +1,10 @@
 import {Component, signal} from '@angular/core';
 import {FailureHandler} from '../../../services/failureHandler';
-import {CreationService} from '../../../services/creation.service';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Bed} from '../../../model/Bed.type';
 import {Room} from '../../../model/Room.type';
 import {RoomService} from '../../../services/room.service';
+import {BedsManagementService} from '../../../services/beds-management.service';
 
 @Component({
   selector: 'app-bed',
@@ -36,7 +36,7 @@ export class BedComponent {
   )
   rooms = signal<Array<Room>>([])
 
-  constructor(private failureHandler: FailureHandler, private roomService: RoomService, private creationService: CreationService) {
+  constructor(private failureHandler: FailureHandler, private roomService: RoomService, private bedService: BedsManagementService) {
   }
 
   async ngOnInit() {
@@ -69,7 +69,7 @@ export class BedComponent {
       this.failMessage.set("Please select state");
       return;
     }
-    await this.creationService.newBed(this.bed())
+    await this.bedService.newBed(this.bed())
 
   }
 
