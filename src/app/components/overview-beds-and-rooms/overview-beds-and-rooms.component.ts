@@ -1,6 +1,4 @@
 import {Component, effect, signal} from '@angular/core';
-import {FailureHandler} from '../../services/failureHandler';
-import {CreationService} from '../../services/creation.service';
 import {BedComponent} from "../edit-form/bed/bed.component";
 import {Room} from '../../model/Room.type';
 import {BedsManagementService} from '../../services/beds-management.service';
