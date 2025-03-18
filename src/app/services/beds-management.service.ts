@@ -3,9 +3,9 @@ import {env} from '../environment/environment';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Room} from '../model/Room.type';
-import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 import {Bed} from '../model/Bed.type';
 import {Booking} from '../model/Booking.type';
+import {SuccesHandlerService} from './succes-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,7 @@ export class BedsManagementService {
   private roomsAndBedsForDateStateSource = new BehaviorSubject<Array<Room>>([]);
   roomsAndBedsForDate$ = this.roomsAndBedsForDateStateSource.asObservable();
 
+private url = env.apiUrl
 
   private bedSource = new BehaviorSubject<Bed>({
     id: 0,
@@ -43,10 +44,16 @@ export class BedsManagementService {
   bookingOfBed$ = this.bookingOfBedSource.asObservable();
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private successHandler : SuccesHandlerService ) {
   }
 
 
+  async newBed(bed: Bed) {
+    return this.http.post<Room>(this.url + 'api/bed/new', bed).subscribe(response => {
+      console.log(response);
+      this.successHandler.successFullCreation("Bed created successfully !");
+    })
+  }
   async getBed(id: number) {
     return this.http.get<any>(`${this.baseUrl}api/bed/get/${id}`).subscribe(
       response => {
@@ -64,8 +71,7 @@ export class BedsManagementService {
     console.log("the bed",bed)
     return this.http.put<any>(`${this.baseUrl}api/bed/edit/${bed.id}`, bed).subscribe(
       response => {
-
-        console.log("sucessfully edited")
+        this.successHandler.successFullCreation("Bed edited successfully !");
         this.getRoomsAndBedState()
       }
     )
