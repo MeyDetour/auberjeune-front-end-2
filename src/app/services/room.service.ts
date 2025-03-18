@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {env} from '../environment/environment';
 import {Room} from '../model/Room.type';
 import {BedsManagementService} from './beds-management.service';
+import {SuccesHandlerService} from './succes-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class RoomService {
 
   private url = env.apiUrl
 
-  constructor(private http: HttpClient, private bedsAndRoom: BedsManagementService) {
+  constructor(private http: HttpClient, private bedsAndRoom: BedsManagementService, private successHandler : SuccesHandlerService) {
   }
 
   async getRooms() {
@@ -33,7 +34,12 @@ export class RoomService {
       this.roomSource.next(response)
     })
   }
-
+  async newRoom(room: Room) {
+    this.http.post<Room>(this.url + 'api/room/new', room).subscribe(response => {
+      console.log(response);
+      this.successHandler.successFullCreation();
+    })
+  }
   async updateRoom(room: Room) {
     return this.http.put<Room>(this.url + "api/room/edit/" + room.id, room).subscribe(response => {
       this.roomSource.next(response)
