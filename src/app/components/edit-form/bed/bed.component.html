@@ -35,17 +35,17 @@
             <label for="room">Room</label>
             <select [(ngModel)]="bed().roomId"  name="room" id="room">
               @for (room of rooms(); track room.id) {
-                <option [selected]="bed()?.roomId === room.id" value="{{room.id}}">{{ room.name }}</option>
+                <option [selected]="bed().roomId === room.id" value="{{room.id}}">{{ room.name }}</option>
               }
             </select>
           </div>
           <div>
             <label for="state">State</label>
             <select name="state" [(ngModel)]="bed().state" id="state">
-              <option [selected]="bed()?.state ==='deleted'" value="inspected">Inspected</option>
-              <option [selected]="bed()?.state === 'blocked'" value="blocked">Blocked</option>
-              <option [selected]="bed()?.state === 'cleaned'" value="cleaned">Cleaned</option>
-              <option [selected]="bed()?.state === 'notcleaned'" value="notCleaned">Not cleaned</option>
+              <option [selected]="bed().state ==='deleted'" value="inspected">Inspected</option>
+              <option [selected]="bed().state === 'blocked'" value="blocked">Blocked</option>
+              <option [selected]="bed().state === 'cleaned'" value="cleaned">Cleaned</option>
+              <option [selected]="bed().state === 'notcleaned'" value="notCleaned">Not cleaned</option>
             </select>
           </div>
           <div class="form-check">
