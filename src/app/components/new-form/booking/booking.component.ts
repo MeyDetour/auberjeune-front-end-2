@@ -99,7 +99,7 @@ export class BookingComponent {
       client.firstName = client.firstName.replaceAll(" ", "")
       client.lastName = client.lastName.replaceAll(" ", "")
       client.birthDate = this.dateTransformer.verifyDate(client.birthDate, "date")
-      if (client.firstName || client.lastName) {
+      if (!client.firstName || !client.lastName) {
         this.failMessage.set("Please complete first name, last name for client")
         return;
       }

@@ -3,11 +3,15 @@ import {HomeComponent} from './pages/home/home.component';
 import {AuthComponent} from './pages/admin/auth/auth.component';
 import {BaseComponent} from './pages/admin/base/base.component';
 import {ErrorComponent} from './pages/error/error.component';
+import {BookComponent} from './pages/client/book/book.component';
 
 export const routes: Routes = [
   {
     path : "",
     component : HomeComponent
+  }, {
+    path : "book",
+    component : BookComponent
   },  {
     path : "admin/auth",
     component : AuthComponent
