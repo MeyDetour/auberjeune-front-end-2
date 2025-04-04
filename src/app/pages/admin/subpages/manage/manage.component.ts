@@ -1,14 +1,12 @@
 import {Component, signal} from '@angular/core';
 import {BedsManagementService} from '../../../../services/beds-management.service';
 import {Room} from '../../../../model/Room.type';
-import {FillingComponent} from '../../../../components/widget/filling/filling.component';
 import {Bed} from '../../../../model/Bed.type';
 import {BedComponent} from '../../../../components/edit-form/bed/bed.component';
 
 @Component({
   selector: 'app-manage',
   imports: [
-    FillingComponent,
     BedComponent
   ],
   templateUrl: './manage.component.html',

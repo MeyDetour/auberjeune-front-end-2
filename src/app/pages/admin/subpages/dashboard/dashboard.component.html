@@ -4,8 +4,11 @@
   </div>
   <div class="pageContent">
 
-    <app-filling></app-filling>
-
+    <div class="whiteContainerWithBordure">
+<h4>Data viz !</h4>
+<p style="font-size: 15px;color: gray" >Go to the data visualization !</p>
+      <button type="button" (click)="dataViz()" class="buttonGrey">Click here !</button>
+    </div>
     <div class="whiteContainerWithBordure">
       <div class="multiChoice">
         <span (click)="changeSection('tocome')" [class.focus]="section()=='tocome'">To come</span>
@@ -18,29 +21,29 @@
         <span>No bookings...</span>
       } @else {
         <header class="rowForBooking">
-         <div>
-           <span>ID</span>
-           <span>Booking Date</span>
-           <span>Clients</span>
-           <span>Phone number</span>
-           <span>E-mail</span>
-         </div>
+          <div>
+            <span>ID</span>
+            <span>Booking Date</span>
+            <span>Clients</span>
+            <span>Phone number</span>
+            <span>E-mail</span>
+          </div>
 
         </header>
         @for (booking of bookings(); track booking.id) {
-        <div class="rowForBooking">
-         <div>
-           <span>#{{ booking.id }}</span>
-           <span>{{booking.startDate}} - {{booking.endDate}}</span>
-           <span>{{booking.clientsNumber}}</span>
-           <span>{{booking.phoneNumber}}</span>
-           <span>{{booking.mail}}</span>
-         </div>
+          <div class="rowForBooking">
+            <div>
+              <span>#{{ booking.id }}</span>
+              <span>{{ booking.startDate }} - {{ booking.endDate }}</span>
+              <span>{{ booking.clientsNumber }}</span>
+              <span>{{ booking.phoneNumber }}</span>
+              <span>{{ booking.mail }}</span>
+            </div>
 
-          <div (click)="renderFormForBooking(booking.id)" class="iconSettings">
-            <img src="/svg/edit.svg" alt="">
+            <div (click)="renderFormForBooking(booking.id)" class="iconSettings">
+              <img src="/svg/edit.svg" alt="">
+            </div>
           </div>
-        </div>
         }
       }
 
@@ -52,6 +55,6 @@
 
 </div>
 
-@if(bookingId() && renderForm()){
+@if (bookingId() && renderForm()) {
   <app-booking (closeEvent)="closeEdition()" [bookingID]="bookingId()"></app-booking>
 }

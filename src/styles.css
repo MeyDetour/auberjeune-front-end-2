@@ -97,10 +97,12 @@ h3 {
   min-width: 80px;
   font-size: 20px;
 }
+
 .buttonYellow:hover {
   background: #f19640;
 }
-.buttonGreen ,.buttonRed{
+
+.buttonGreen, .buttonRed {
   background: var(--green);
   border: none;
   border-radius: 10px;
@@ -111,14 +113,19 @@ h3 {
   min-width: 80px;
   font-size: 20px;
 }
-.buttonRed{
+
+.buttonRed {
   background: var(--red);
 }
+
 .buttonGreen:hover {
   background: rgba(159, 205, 128, 0.92);
-}.buttonRed:hover {
+}
+
+.buttonRed:hover {
   background: rgba(205, 128, 128, 0.92);
 }
+
 .buttonGrey {
   background: #eae7e7;
   border: none;
@@ -151,10 +158,12 @@ h3 {
   background: rgba(246, 192, 193, 0.92)
 
 }
-.unreservableBed{
+
+.unreservableBed {
   position: relative;
 }
-.unreservableBed::after{
+
+.unreservableBed::after {
   content: "";
   width: 101%;
   height: 2px;
@@ -214,7 +223,7 @@ form {
   font-family: jost, sans-serif;
 }
 
-form div ,form fieldset {
+form div, form fieldset {
 
   display: flex;
   flex-direction: column;
@@ -279,13 +288,13 @@ form .form-check input:checked ~ .checkmark {
   border: 2px solid var(--green);
 }
 
-form .form-radio{
+form .form-radio {
   display: flex;
   flex-direction: row;
 
 }
 
-form .form-radio > div{
+form .form-radio > div {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -294,7 +303,7 @@ form .form-radio > div{
 
 }
 
-form .form-radio > div input{
+form .form-radio > div input {
   position: absolute;
   opacity: 0;
   height: 20px;
@@ -303,7 +312,7 @@ form .form-radio > div input{
 }
 
 
-form .form-radio > div .radioMark{
+form .form-radio > div .radioMark {
   background: var(--input-background);
   border: 2px solid var(--stroke);
   border-radius: 50%;
@@ -333,3 +342,15 @@ form fieldset {
   padding-block: 32px;
 }
 
+
+@media only screen and (max-width: 1200px) {
+  body {
+    font-size: 16px;
+  }
+
+  form div input:not([type="checkbox"]),
+  form div select {
+  font-size: 16px;
+  }
+
+}

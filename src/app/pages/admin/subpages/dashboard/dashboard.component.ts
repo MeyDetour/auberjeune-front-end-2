@@ -1,5 +1,4 @@
 import {Component, signal} from '@angular/core';
-import {FillingComponent} from "../../../../components/widget/filling/filling.component";
 import {BookingService} from '../../../../services/booking.service';
 import {Booking} from '../../../../model/Booking.type';
 import {BookingComponent} from '../../../../components/edit-form/booking/booking.component';
@@ -7,7 +6,6 @@ import {BookingComponent} from '../../../../components/edit-form/booking/booking
 @Component({
   selector: 'app-dashboard',
   imports: [
-    FillingComponent,
     BookingComponent
   ],
   templateUrl: './dashboard.component.html',
@@ -17,7 +15,8 @@ export class DashboardComponent {
   section = signal<string>("tocome")
   bookings = signal<Booking[]>([])
   bookingId = signal<number>(0)
-renderForm= signal<boolean>(false)
+  renderForm = signal<boolean>(false)
+
   constructor(private bookingService: BookingService) {
   }
 
@@ -41,7 +40,11 @@ renderForm= signal<boolean>(false)
   async closeEdition() {
     this.bookingId.set(0)
     this.renderForm.set(false)
-
-
   }
+
+  dataViz() {
+
+    const token = localStorage.getItem('token');
+    const url = `https://auberjeune-dashboard.meydetour.com/?token=${token}`;
+    window.open(url, '_blank'); }
 }

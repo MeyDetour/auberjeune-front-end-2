@@ -26,7 +26,7 @@ height: 90%;
 .pageContent> div:last-child{
   display: flex;
   flex-direction: column;
-  width: 83%;
+  width: 100%;
   gap: 25px;
   height: 100%;
 }
